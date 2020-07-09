@@ -5,7 +5,7 @@
   "scripts": {
     "test": "npm run test --prefix packages/wormhole-demo",
     "test.watch": "npm run test.watch --prefix packages/wormhole-demo",
-    "build": "npm run build --prefix packages/wormhole",
+    "build": "cp README.md packages/wormhole && npm run build --prefix packages/wormhole",
     "release": "npm run release --prefix packages/wormhole"
   }
 }
