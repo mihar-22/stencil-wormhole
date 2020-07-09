@@ -97,7 +97,7 @@ export class MyParent {
     render() {
         return (
           // 4. Create the universe provider.
-          <Universe.Provider creator={this} state={this.state}>
+          <Universe.Provider state={this.state}>
             <my-child />
           </Universe.Provider>
         );   
@@ -130,7 +130,7 @@ export class MyChild {
 openWormhole(MyChild, ['message', 'data']);
 ```
 
-If you want to type the `openWormhole` function then simply create a higher-order function.
+If you want stricter typing on the `openWormhole` function then simply create a higher-order function.
 
 ```ts
 import { openWormhole, WormholeConsumerConstructor } from 'stencil-wormhole'

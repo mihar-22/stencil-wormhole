@@ -22,7 +22,7 @@ export class FakeUniverse {
 
   render() {
     return (
-      <Universe.Provider creator={this} state={this.state}>
+      <Universe.Provider state={this.state}>
         <fake-consumer />
         <slot />
       </Universe.Provider>

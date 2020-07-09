@@ -1,5 +1,5 @@
 import { CloseWormhole, OpenWormhole, WormholeConsumer } from "./consumer";
-import { FunctionalComponent, getElement } from "@stencil/core";
+import { FunctionalComponent, getElement, getRenderingRef } from "@stencil/core";
 
 export interface Creator {
   disconnectedCallback?(): void
@@ -7,14 +7,13 @@ export interface Creator {
 
 export type UniverseState = Record<string ,any>
 
-export interface UniverseProps {
-  creator: Creator
+export interface UniverseProviderProps {
   state: UniverseState
 }
 
 export interface IUniverse {
   create(creator: Creator, initialState: UniverseState),
-  Provider: FunctionalComponent<UniverseProps>
+  Provider: FunctionalComponent<UniverseProviderProps>
 }
 
 const multiverse = new Map<Creator, Map<WormholeConsumer, string[]>>()
@@ -50,7 +49,8 @@ export const Universe: IUniverse = {
     }
   },
 
-  Provider({ creator, state }, children) {
+  Provider({ state }, children) {
+    const creator = getRenderingRef();
     const wormholes = multiverse.get(creator);
     wormholes.forEach((fields, consumer) => { updateConsumer(consumer, fields, state) });
     return children;
