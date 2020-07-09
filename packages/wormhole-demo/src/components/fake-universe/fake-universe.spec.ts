@@ -61,3 +61,18 @@ it('should call lifecycle methods', async () => {
   expect(consumer.wasConnectedCallbackCalled).toHaveBeenCalled()
   expect(consumer.wasDisconnectedCallbackCalled).toHaveBeenCalled()
 });
+
+it('should pass data through wormhole to slot', async () => {
+  await buildPage({
+    html: '<fake-universe><fake-consumer></fake-consumer></fake-universe>'
+  })
+
+  const universe = page.body.querySelector('fake-universe')!
+  const consumer = page.body.querySelectorAll('fake-consumer')!
+  expect(consumer[0].message).toEqual('');
+  expect(consumer[1].message).toEqual('');
+  universe.state = { message: 'apples' }
+  await page.waitForChanges();
+  expect(consumer[1].message).toEqual('apples');
+  expect(consumer[1].message).toEqual('apples')
+});

@@ -73,31 +73,33 @@ $: pnpm install stencil-wormhole
 ### Create Universe
 
 ```tsx
-import { h, State, Element, Component } from '@stencil/core'
+import { h, State, Component } from '@stencil/core'
 import { Universe } from 'stencil-wormhole'
 
 @Component({
     tag: 'my-parent'
 })
 export class MyParent {
-    // 1. Setup the element reference.
-    @Element() el!: HTMLElement;
-    
-    // 2. Build your state.
+    // 1. Setup your state.
     @State() state: Record<string, any> = {
         message: 'apples',
         data: { content: 1 },
         // ...
     };
 
+    connectedCallback() {
+        // 2. Create the universe.
+        Universe.create(this, this.state);
+    }   
+
     // 3. Update your state as usual.
 
     render() {
         return (
-          // 4. Create a universe that will hold the state.
-          <Universe creator={this} state={this.state}>
+          // 4. Create the universe provider.
+          <Universe.Provider creator={this} state={this.state}>
             <my-child />
-          </Universe>
+          </Universe.Provider>
         );   
     }
 }
@@ -106,19 +108,16 @@ export class MyParent {
 ### Open Wormhole
 
 ```tsx
-import { h, Prop, Element, Component } from '@stencil/core'
+import { h, Prop, Component } from '@stencil/core'
 import { openWormhole } from 'stencil-wormhole'
 
 @Component({
     tag: 'my-child'
 })
 export class MyChild {
-    // 1. Setup the element reference.
-    @Element() el!: HTMLElement;
-
-    // 2. Setup all props that are being injected.
-    @Prop() message: string;
-    @Prop() data = {};
+    // 1. Setup all props that are being injected.
+    @Prop() message!: string;
+    @Prop() data!: object;
 
     render() {
         return (
@@ -127,7 +126,7 @@ export class MyChild {
     }
 }
 
-// 3. Open the wormhole and pass in the props to be injected.
+// 2. Open the wormhole and pass in the props to be injected.
 openWormhole(MyChild, ['message', 'data']);
 ```
 
