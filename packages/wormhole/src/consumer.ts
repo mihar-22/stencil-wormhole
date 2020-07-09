@@ -1,3 +1,5 @@
+import {getElement} from "@stencil/core";
+
 export interface OpenWormhole {
   consumer: any
   fields: string[]
@@ -8,7 +10,7 @@ export interface CloseWormhole {
 }
 
 export interface WormholeConsumer {
-  el: HTMLElement
+  // ...
 }
 
 export interface WormholeConsumerConstructor {
@@ -20,7 +22,7 @@ export const openWormhole = (Component: WormholeConsumerConstructor, props: stri
   const { connectedCallback, disconnectedCallback } = ComponentPrototype;
 
   ComponentPrototype.connectedCallback = function () {
-    const { el } = this as WormholeConsumer;
+    const el = getElement(this);
 
     const event = new CustomEvent<OpenWormhole>('openWormhole', {
       bubbles: true,
@@ -39,7 +41,7 @@ export const openWormhole = (Component: WormholeConsumerConstructor, props: stri
   };
 
   ComponentPrototype.disconnectedCallback = function () {
-    const { el } = this as WormholeConsumer;
+    const el = getElement(this);
 
     const event = new CustomEvent<CloseWormhole>('closeWormhole', {
       bubbles: true,

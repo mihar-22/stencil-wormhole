@@ -73,7 +73,7 @@ $: pnpm install stencil-wormhole
 ### Create Universe
 
 ```tsx
-import { h, Prop, Element, Component } from '@stencil/core'
+import { h, State, Element, Component } from '@stencil/core'
 import { Universe } from 'stencil-wormhole'
 
 @Component({
@@ -84,13 +84,13 @@ export class MyParent {
     @Element() el!: HTMLElement;
     
     // 2. Build your state.
-    @Prop() state: Record<string, any> = {
+    @State() state: Record<string, any> = {
         message: 'apples',
         data: { content: 1 },
         // ...
     };
 
-    // 3. Update your state just like any other prop.
+    // 3. Update your state as usual.
 
     render() {
         return (

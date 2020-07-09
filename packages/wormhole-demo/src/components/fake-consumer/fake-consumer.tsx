@@ -1,12 +1,10 @@
-import { h, Element, Component, Prop } from "@stencil/core";
+import { h, Component, Prop } from "@stencil/core";
 import { openWormhole } from "stencil-wormhole";
 
 @Component({
   tag: 'fake-consumer',
 })
 export class FakeConsumer {
-  @Element() el!: HTMLElement;
-
   @Prop() message: string = '';
 
   @Prop() data: any = {};

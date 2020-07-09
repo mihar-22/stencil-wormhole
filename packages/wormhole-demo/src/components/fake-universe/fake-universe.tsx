@@ -1,15 +1,20 @@
-import { h, Component, Element, Prop } from "@stencil/core";
+import { h, Component, Prop } from "@stencil/core";
 import { Universe } from "stencil-wormhole";
 
 @Component({
   tag: 'fake-universe'
 })
 export class FakeUniverse {
-  @Element() el!: HTMLElement;
-
-  @Prop({ mutable: true }) state: Record<string, any> = {};
+  @Prop({ mutable: true }) state: Record<string, any> = {
+    message: '',
+    data: {}
+  };
 
   @Prop() wasDisconnectedCallbackCalled = jest.fn()
+
+  connectedCallback() {
+    Universe.create(this, this.state);
+  }
 
   disconnectedCallback() {
     this.wasDisconnectedCallbackCalled()
@@ -17,9 +22,10 @@ export class FakeUniverse {
 
   render() {
     return (
-      <Universe creator={this} state={this.state}>
+      <Universe.Provider creator={this} state={this.state}>
         <fake-consumer />
-      </Universe>
+        <slot />
+      </Universe.Provider>
     )
   }
 }

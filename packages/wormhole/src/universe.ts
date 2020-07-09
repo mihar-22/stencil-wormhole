@@ -1,34 +1,43 @@
-import { FunctionalComponent } from "@stencil/core";
 import { CloseWormhole, OpenWormhole, WormholeConsumer } from "./consumer";
+import {FunctionalComponent, getElement} from "@stencil/core";
 
 export interface Creator {
-  el: HTMLElement
   disconnectedCallback?(): void
 }
 
+export type UniverseState = Record<string ,any>
+
 export interface UniverseProps {
-  creator: Creator,
-  state: Record<string, any>
+  creator: Creator
+  state: UniverseState
+}
+
+export interface IUniverse {
+  create(creator: Creator, initialState: UniverseState),
+  Provider: FunctionalComponent<UniverseProps>
 }
 
 const multiverse = new Map<Creator, Map<WormholeConsumer, string[]>>()
 
-export const Universe: FunctionalComponent<UniverseProps> = ({ creator, state }, children) => {
-  let wormholes = multiverse.get(creator);
+const updateConsumer = (consumer: WormholeConsumer, fields: string[], state: UniverseState) => {
+  fields.forEach((field) => { consumer[field] = state[field]; });
+}
 
-  if (!multiverse.has(creator)) {
-    if (typeof wormholes === 'undefined') {
-      wormholes = new Map();
-      multiverse.set(creator, wormholes);
-    }
+export const Universe: IUniverse = {
+  create(creator: Creator, initialState: UniverseState) {
+    const el = getElement(creator);
+    const wormholes = new Map();
 
-    creator.el.addEventListener('openWormhole', (event: CustomEvent<OpenWormhole>) => {
+    multiverse.set(creator, wormholes);
+
+    el.addEventListener('openWormhole', (event: CustomEvent<OpenWormhole>) => {
       event.stopPropagation();
       const { consumer, fields } = event.detail;
       wormholes.set(consumer, fields);
+      updateConsumer(consumer, fields, initialState);
     });
 
-    creator.el.addEventListener('closeWormhole', (event: CustomEvent<CloseWormhole>) => {
+    el.addEventListener('closeWormhole', (event: CustomEvent<CloseWormhole>) => {
       event.stopPropagation();
       const { consumer } = event.detail;
       wormholes.delete(consumer);
@@ -39,13 +48,12 @@ export const Universe: FunctionalComponent<UniverseProps> = ({ creator, state },
       multiverse.delete(creator);
       if (disconnectedCallback) { disconnectedCallback.call(this) }
     }
-  }
+  },
 
-  wormholes.forEach((fields, consumer) => {
-    fields.forEach((field) => {
-      consumer[field] = state[field];
-    });
-  });
+  Provider({ creator, state }, children) {
+    const wormholes = multiverse.get(creator);
+    wormholes.forEach((fields, consumer) => { updateConsumer(consumer, fields, state) });
+    return children;
+  },
+};
 
-  return children;
-}
