@@ -47,7 +47,7 @@ packages:
       debug: 4.1.1
       gensync: 1.0.0-beta.1
       json5: 2.1.3
-      lodash: 4.17.15
+      lodash: 4.17.19
       resolve: 1.17.0
       semver: 5.7.1
       source-map: 0.5.7
@@ -60,7 +60,7 @@ packages:
     dependencies:
       '@babel/types': 7.10.4
       jsesc: 2.5.2
-      lodash: 4.17.15
+      lodash: 4.17.19
       source-map: 0.5.7
     dev: true
     resolution:
@@ -99,7 +99,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.10.4
       '@babel/template': 7.10.4
       '@babel/types': 7.10.4
-      lodash: 4.17.15
+      lodash: 4.17.19
     dev: true
     resolution:
       integrity: sha512-Er2FQX0oa3nV7eM1o0tNCTx7izmQtwAQsIiaLRWtavAAEcskb0XJ5OjJbVrYXWOTr8om921Scabn4/tzlx7j1Q==
@@ -286,14 +286,14 @@ packages:
       '@babel/types': 7.10.4
       debug: 4.1.1
       globals: 11.12.0
-      lodash: 4.17.15
+      lodash: 4.17.19
     dev: true
     resolution:
       integrity: sha512-aSy7p5THgSYm4YyxNGz6jZpXf+Ok40QF3aA2LyIONkDHpAcJzDUqlCKXv6peqYUs2gmic849C/t2HKw2a2K20Q==
   /@babel/types/7.10.4:
     dependencies:
       '@babel/helper-validator-identifier': 7.10.4
-      lodash: 4.17.15
+      lodash: 4.17.19
       to-fast-properties: 2.0.0
     dev: true
     resolution:
@@ -624,13 +624,13 @@ packages:
       integrity: sha512-4jTmn8WossTUaLfNDfXk4fVJgbz5JgZE8eCs4BvIb52lvIH8rpVMD1fgRCrHbSd6LRPE5JFZSfAEtszrOq3ZFQ==
   /@octokit/types/4.1.10:
     dependencies:
-      '@types/node': 14.0.19
+      '@types/node': 14.0.20
     dev: true
     resolution:
       integrity: sha512-/wbFy1cUIE5eICcg0wTKGXMlKSbaAxEr00qaBXzscLXpqhcwgXeS6P8O0pkysBhRfyjkKjJaYrvR1ExMO5eOXQ==
   /@octokit/types/5.0.1:
     dependencies:
-      '@types/node': 14.0.19
+      '@types/node': 14.0.20
     dev: true
     resolution:
       integrity: sha512-GorvORVwp244fGKEt3cgt/P+M0MGy4xEDbckw+K5ojEezxyMDgCaYPKVct+/eWQfZXOT7uq0xRpmrl/+hliabA==
@@ -641,7 +641,7 @@ packages:
       conventional-commits-parser: 3.1.0
       debug: 4.1.1
       import-from: 3.0.0
-      lodash: 4.17.15
+      lodash: 4.17.19
       micromatch: 4.0.2
       semantic-release: 17.1.1_semantic-release@17.1.1
     dev: true
@@ -668,7 +668,7 @@ packages:
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.0
       issue-parser: 6.0.0
-      lodash: 4.17.15
+      lodash: 4.17.19
       mime: 2.4.6
       p-filter: 2.1.0
       p-retry: 4.2.0
@@ -687,7 +687,7 @@ packages:
       aggregate-error: 3.0.1
       execa: 4.0.3
       fs-extra: 9.0.1
-      lodash: 4.17.15
+      lodash: 4.17.19
       nerf-dart: 1.0.0
       normalize-url: 5.0.0
       npm: 6.14.6
@@ -714,7 +714,7 @@ packages:
       get-stream: 5.1.0
       import-from: 3.0.0
       into-stream: 5.1.1
-      lodash: 4.17.15
+      lodash: 4.17.19
       read-pkg-up: 7.0.1
       semantic-release: 17.1.1_semantic-release@17.1.1
     dev: true
@@ -787,7 +787,7 @@ packages:
       integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
   /@types/graceful-fs/4.1.3:
     dependencies:
-      '@types/node': 14.0.19
+      '@types/node': 14.0.20
     dev: true
     resolution:
       integrity: sha512-AiHRaEB50LQg0pZmm659vNBb9f4SJ0qrAnteuzhSeAUcJKxoYgEnprg/83kppCnc2zvtCKbdZry1a5pVY3lOTQ==
@@ -819,10 +819,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
-  /@types/node/14.0.19:
+  /@types/node/14.0.20:
     dev: true
     resolution:
-      integrity: sha512-yf3BP/NIXF37BjrK5klu//asUWitOEoUP5xE1mhSUjazotwJ/eJDgEmMQNlOeWOVv72j24QQ+3bqXHE++CFGag==
+      integrity: sha512-MRn/NP3dee8yL5QhbSA6riuwkS+UOcsPUMOIOG3KMUQpuor/2TopdRBu8QaaB4fGU+gz/bzyDWt0FtUbeJ8H1A==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -837,7 +837,7 @@ packages:
       integrity: sha512-IkVfat549ggtkZUthUzEX49562eGikhSYeVGX97SkMFn+sTZrgRewXjQ4tPKFPCykZHkX1Zfd9OoELGqKU2jJA==
   /@types/puppeteer/3.0.1:
     dependencies:
-      '@types/node': 14.0.19
+      '@types/node': 14.0.20
     dev: true
     resolution:
       integrity: sha512-t03eNKCvWJXhQ8wkc5C6GYuSqMEdKLOX0GLMGtks25YZr38wKZlKTwGM/BoAPVtdysX7Bb9tdwrDS1+NrW3RRA==
@@ -861,7 +861,7 @@ packages:
       integrity: sha512-Dk/IDOPtOgubt/IaevIUbTgV7doaKkoorvOyYM2CMwuDyP89bekI7H4xLIwunNYiK9jhCkmc6pUrJk3cj2AB9w==
   /@types/yauzl/2.9.1:
     dependencies:
-      '@types/node': 14.0.19
+      '@types/node': 14.0.20
     dev: true
     optional: true
     resolution:
@@ -1479,7 +1479,7 @@ packages:
       dateformat: 3.0.3
       handlebars: 4.7.6
       json-stringify-safe: 5.0.1
-      lodash: 4.17.15
+      lodash: 4.17.19
       meow: 7.0.1
       semver: 6.3.0
       split: 1.0.1
@@ -1503,7 +1503,7 @@ packages:
     dependencies:
       JSONStream: 1.3.5
       is-text-path: 1.0.1
-      lodash: 4.17.15
+      lodash: 4.17.19
       meow: 7.0.1
       split2: 2.2.0
       through2: 3.0.2
@@ -3396,10 +3396,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-2ZwHpmnp5tJOE2Lf4mbGdhavEwI=
-  /lodash/4.17.15:
+  /lodash/4.17.19:
     dev: true
     resolution:
-      integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+      integrity: sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
   /lru-cache/5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -4368,7 +4368,7 @@ packages:
       integrity: sha1-jcrkcOHIirwtYA//Sndihtp15jc=
   /request-promise-core/1.1.3_request@2.88.2:
     dependencies:
-      lodash: 4.17.15
+      lodash: 4.17.19
       request: 2.88.2
     dev: true
     engines:
@@ -4556,7 +4556,7 @@ packages:
       git-log-parser: 1.2.0
       hook-std: 2.0.0
       hosted-git-info: 3.0.4
-      lodash: 4.17.15
+      lodash: 4.17.19
       marked: 1.1.0
       marked-terminal: 4.1.0_marked@1.1.0
       micromatch: 4.0.2

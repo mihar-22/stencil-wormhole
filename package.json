@@ -6,6 +6,6 @@
     "test": "npm run test --prefix packages/wormhole-demo",
     "test.watch": "npm run test.watch --prefix packages/wormhole-demo",
     "build": "npm run build --prefix packages/wormhole",
-    "release": "npm run build && npm run test && npm run release --prefix packages/wormhole"
+    "release": "npm run release --prefix packages/wormhole"
   }
 }
