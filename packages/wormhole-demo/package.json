@@ -1,0 +1,23 @@
+{
+  "name": "stencil-wormhole-demo",
+  "private": true,
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "scripts": {
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "devDependencies": {
+    "@stencil/core": "^1.16.0",
+    "@types/jest": "^26.0.4",
+    "@types/puppeteer": "3.0.1",
+    "jest": "26.1.0",
+    "jest-cli": "26.1.0",
+    "puppeteer": "5.0.0",
+    "stencil-wormhole": "workspace:1.0.0"
+  }
+}
