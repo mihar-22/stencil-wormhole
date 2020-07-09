@@ -134,14 +134,14 @@ openWormhole(MyChild, ['message', 'data']);
 If you want to type the `openWormhole` function then simply create a higher-order function.
 
 ```ts
-import { openWormhole, WormholeConstructor } from 'stencil-wormhole'
+import { openWormhole, WormholeConsumerConstructor } from 'stencil-wormhole'
 
 interface SpecialProps {
     apples: string
 }
 
 export const openSpecialWormhole = (
-    Component: WormholeConstructor, 
+    Component: WormholeConsumerConstructor, 
     props: (keyof SpecialProps)[]
 ) => openWormhole(Component, props);
 ```
