@@ -1,5 +1,5 @@
 import { CloseWormhole, OpenWormhole, WormholeConsumer } from "./consumer";
-import {FunctionalComponent, getElement} from "@stencil/core";
+import { FunctionalComponent, getElement } from "@stencil/core";
 
 export interface Creator {
   disconnectedCallback?(): void

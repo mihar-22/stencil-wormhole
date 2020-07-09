@@ -2,12 +2,13 @@ importers:
   .:
     specifiers: {}
   packages/wormhole:
-    devDependencies:
+    dependencies:
       '@stencil/core': 1.16.0
+    devDependencies:
       semantic-release: 17.1.1_semantic-release@17.1.1
       typescript: 3.9.6
     specifiers:
-      '@stencil/core': ^1.12.2
+      '@stencil/core': ^1
       semantic-release: ^17.1.1
       typescript: ^3.9.6
   packages/wormhole-demo:
@@ -741,7 +742,6 @@ packages:
   /@stencil/core/1.16.0:
     dependencies:
       typescript: 3.9.6
-    dev: true
     engines:
       node: '>=10.13.0'
       npm: '>=6.0.0'
@@ -5197,7 +5197,6 @@ packages:
     resolution:
       integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   /typescript/3.9.6:
-    dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true

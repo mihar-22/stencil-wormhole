@@ -1,4 +1,4 @@
-import {getElement} from "@stencil/core";
+import { getElement } from "@stencil/core";
 
 export interface OpenWormhole {
   consumer: any
