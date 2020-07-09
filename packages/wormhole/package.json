@@ -4,14 +4,9 @@
   "license": "MIT",
   "author": "Rahim Alwer <rahim_alwer@hotmail.com>",
   "description": "Pass props down component trees easily via wormholes.",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/stencil-wormhole/stencil-wormhole.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "homepage": "https://github.com/mihar-22/stencil-wormhole",
   "bugs": {
     "url": "https://github.com/mihar-22/stencil-wormhole"
@@ -20,12 +15,15 @@
     "dist/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
     "release": "semantic-release"
   },
   "devDependencies": {
     "@stencil/core": "^1.12.2",
-    "semantic-release": "^17.1.1"
+    "semantic-release": "^17.1.1",
+    "typescript": "^3.9.6"
   },
   "keywords": [
     "stencil",
