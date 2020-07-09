@@ -3,9 +3,11 @@ importers:
     specifiers: {}
   packages/wormhole:
     devDependencies:
+      '@stencil/core': 1.16.0
       semantic-release: 17.1.1_semantic-release@17.1.1
       typescript: 3.9.6
     specifiers:
+      '@stencil/core': ^1
       semantic-release: ^17.1.1
       typescript: ^3.9.6
   packages/wormhole-demo:
