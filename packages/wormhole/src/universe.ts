@@ -1,5 +1,5 @@
 import { OpenWormhole, WormholeConsumer } from "./consumer";
-import { FunctionalComponent, getElement, getRenderingRef, forceUpdate } from "@stencil/core";
+import { FunctionalComponent, getElement, getRenderingRef } from "@stencil/core";
 
 export interface Creator {
   connectedCallback?(): void
@@ -18,7 +18,6 @@ const multiverse = new Map<Creator, Wormholes>()
 
 const updateConsumer = (consumer: WormholeConsumer, fields: string[], state: UniverseState) => {
   fields.forEach((field) => { consumer[field] = state[field]; });
-  forceUpdate(consumer);
 }
 
 export const Universe: {
