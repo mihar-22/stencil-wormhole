@@ -8,6 +8,7 @@
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "scripts": {
+    "start": "stencil build --dev --watch --serve --port 3336",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
@@ -17,7 +18,9 @@
     "@types/puppeteer": "3.0.1",
     "jest": "26.1.0",
     "jest-cli": "26.1.0",
-    "puppeteer": "5.0.0",
-    "stencil-wormhole": "workspace:1.0.0"
+    "puppeteer": "5.0.0"
+  },
+  "dependencies": {
+    "stencil-wormhole": "workspace:*"
   }
 }

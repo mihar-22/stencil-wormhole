@@ -12,9 +12,12 @@ const buildPage = async (opts?: Partial<NewSpecPageOptions>) => {
   });
 };
 
+const buildUniverse = (slot: string) => `<fake-universe>${slot}</fake-universe>`
+const buildConsumer = () => '<fake-consumer />'
+
 it('should pass data through the wormhole', async () => {
   await buildPage({
-    html: '<fake-universe></fake-universe>'
+    html: buildUniverse(buildConsumer())
   })
 
   const universe = page.body.querySelector('fake-universe')!
@@ -30,7 +33,7 @@ it('should pass data through the wormhole', async () => {
 
 it('should be instance scoped', async () => {
   await buildPage({
-    html: '<fake-universe></fake-universe><fake-universe></fake-universe>'
+    html: buildUniverse(`${buildConsumer()}${buildUniverse(buildConsumer())}`)
   })
 
   const universes = page.body.querySelectorAll('fake-universe')!
@@ -45,34 +48,69 @@ it('should be instance scoped', async () => {
   await page.waitForChanges();
   expect(consumerA.message).toEqual('apples')
   expect(consumerB.message).toEqual('apples and more apples')
-
 });
 
 it('should call lifecycle methods', async () => {
   await buildPage({
-    html: '<fake-universe></fake-universe>'
+    html: buildUniverse(buildConsumer())
   })
-
+  
   const universe = page.body.querySelector('fake-universe')!
   const consumer = page.body.querySelector('fake-consumer')!
+
   document.body.innerHTML = '';
   await page.waitForChanges();
-  expect(universe.wasDisconnectedCallbackCalled).toHaveBeenCalled()
-  expect(consumer.wasConnectedCallbackCalled).toHaveBeenCalled()
-  expect(consumer.wasDisconnectedCallbackCalled).toHaveBeenCalled()
+
+  expect(universe.wasConnectedCallbackCalled).toHaveBeenCalledWith('')
+  expect(universe.wasDisconnectedCallbackCalled).toHaveBeenCalledWith('')
+  expect(consumer.wasConnectedCallbackCalled).toHaveBeenCalledWith(undefined)
+  expect(consumer.wasDisconnectedCallbackCalled).toHaveBeenCalledWith('')
 });
 
-it('should pass data through wormhole to slot', async () => {
-  await buildPage({
-    html: '<fake-universe><fake-consumer></fake-consumer></fake-universe>'
-  })
+it('should safely connect/disconnect universe', async () => {
+  await buildPage({ html: '' })
+  
+  const universe = page.doc.createElement('fake-universe')!
+  const consumer = page.doc.createElement('fake-consumer')!
+  universe.appendChild(consumer);
+  page.body.appendChild(universe);
 
-  const universe = page.body.querySelector('fake-universe')!
-  const consumer = page.body.querySelectorAll('fake-consumer')!
-  expect(consumer[0].message).toEqual('');
-  expect(consumer[1].message).toEqual('');
-  universe.state = { message: 'apples' }
   await page.waitForChanges();
-  expect(consumer[1].message).toEqual('apples');
-  expect(consumer[1].message).toEqual('apples')
+  expect(consumer.message).toEqual('');
+  universe.state = { message: 'apples' };
+  await page.waitForChanges();
+  expect(consumer.message).toEqual('apples');
+
+  universe.remove();
+  await page.waitForChanges();
+  
+  page.body.appendChild(universe);
+  await page.waitForChanges();
+  universe.state = { message: 'apples' };
+  await page.waitForChanges();
+  expect(consumer.message).toEqual('apples');
+});
+
+it('should safely connect/disconnect consumer', async () => {
+  await buildPage({
+    html: buildUniverse('')
+  })
+  
+  const universe = page.body.querySelector('fake-universe')!
+  const consumer = page.doc.createElement('fake-consumer');
+
+  universe.appendChild(consumer);
+
+  await page.waitForChanges();
+  expect(consumer.message).toEqual('');
+  expect(consumer.data).toEqual({});
+
+  universe.state = { message: 'apples' };
+  await page.waitForChanges();
+  expect(consumer.message).toEqual('apples');
+
+  consumer.remove();
+  universe.state = { message: 'chicken' };
+  await page.waitForChanges();
+  expect(consumer.message).toEqual('apples');
 });

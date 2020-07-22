@@ -10,20 +10,25 @@ export class FakeUniverse {
     data: {}
   };
 
-  @Prop() wasDisconnectedCallbackCalled = jest.fn()
+  @Prop() wasConnectedCallbackCalled = jest.fn();
+
+  @Prop() wasDisconnectedCallbackCalled = jest.fn();
 
   connectedCallback() {
+    this.wasConnectedCallbackCalled(this.state.message);
+  }
+
+  componentWillLoad() {
     Universe.create(this, this.state);
   }
 
   disconnectedCallback() {
-    this.wasDisconnectedCallbackCalled()
+    this.wasDisconnectedCallbackCalled(this.state.message)
   }
 
   render() {
     return (
       <Universe.Provider state={this.state}>
-        <fake-consumer />
         <slot />
       </Universe.Provider>
     )

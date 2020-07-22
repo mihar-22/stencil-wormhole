@@ -1,28 +1,28 @@
 import { getElement } from "@stencil/core";
-
-export interface OpenWormhole {
-  consumer: any
-  fields: string[]
-}
-
-export interface CloseWormhole {
-  consumer: any
-}
+import { createDeferredPromise, DeferredPromise } from "./deferred";
 
 export interface WormholeConsumer {
-  // ...
+  connectedCallback?(): void
+  disconnectedCallback?(): void
 }
 
 export interface WormholeConsumerConstructor {
   new(...args: any[]): WormholeConsumer
 }
 
+export interface OpenWormhole {
+  consumer: WormholeConsumer
+  fields: string[]
+  onOpen: DeferredPromise,
+}
+
 export const openWormhole = (Component: WormholeConsumerConstructor, props: string[]) => {
   const ComponentPrototype = Component.prototype;
-  const { connectedCallback, disconnectedCallback } = ComponentPrototype;
+  const { componentWillLoad } = ComponentPrototype;
 
-  ComponentPrototype.connectedCallback = function () {
+  ComponentPrototype.componentWillLoad = function () {
     const el = getElement(this);
+    const onOpen = createDeferredPromise();
 
     const event = new CustomEvent<OpenWormhole>('openWormhole', {
       bubbles: true,
@@ -30,29 +30,16 @@ export const openWormhole = (Component: WormholeConsumerConstructor, props: stri
       detail: {
         consumer: this,
         fields: props,
+        onOpen,
       },
     });
 
     el.dispatchEvent(event);
 
-    if (connectedCallback) {
-      return connectedCallback.call(this);
-    }
-  };
-
-  ComponentPrototype.disconnectedCallback = function () {
-    const el = getElement(this);
-
-    const event = new CustomEvent<CloseWormhole>('closeWormhole', {
-      bubbles: true,
-      composed: true,
-      detail: { consumer: this },
-    });
-
-    el.dispatchEvent(event);
-
-    if (disconnectedCallback) {
-      disconnectedCallback.call(this);
-    }
+    return onOpen.promise.then(() => {
+      if (componentWillLoad) {
+        return componentWillLoad.call(this);
+      }
+    })
   };
 };

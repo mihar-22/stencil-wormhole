@@ -5,20 +5,20 @@ import { openWormhole } from "stencil-wormhole";
   tag: 'fake-consumer',
 })
 export class FakeConsumer {
-  @Prop() message: string = '';
+  @Prop() message!: string;
 
-  @Prop() data: any = {};
+  @Prop() data!: any;
 
-  @Prop() wasConnectedCallbackCalled = jest.fn()
+  @Prop() wasConnectedCallbackCalled = jest.fn();
 
-  @Prop() wasDisconnectedCallbackCalled = jest.fn()
+  @Prop() wasDisconnectedCallbackCalled = jest.fn();
 
   connectedCallback() {
-    this.wasConnectedCallbackCalled();
+    this.wasConnectedCallbackCalled(this.message);
   }
 
   disconnectedCallback() {
-    this.wasDisconnectedCallbackCalled()
+    this.wasDisconnectedCallbackCalled(this.message)
   }
 
   render() {
@@ -28,7 +28,4 @@ export class FakeConsumer {
   }
 }
 
-openWormhole(FakeConsumer, [
-  'message',
-  'data'
-]);
+openWormhole(FakeConsumer, ['message', 'data']);
