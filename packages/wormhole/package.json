@@ -21,10 +21,10 @@
     "release": "semantic-release"
   },
   "peerDependencies": {
-    "@stencil/core": "^1"
+    "@stencil/core": "^1 || ^2"
   },
   "devDependencies": {
-    "@stencil/core": "^1",
+    "@stencil/core": "2.0.0-3",
     "semantic-release": "^17.1.1",
     "typescript": "^3.9.6"
   },
