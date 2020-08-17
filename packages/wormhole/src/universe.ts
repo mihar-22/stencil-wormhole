@@ -14,7 +14,12 @@ export interface UniverseProviderProps {
 
 export type Wormholes = Map<WormholeConsumer, string[]>;
 
-const multiverse = new Map<Creator, Wormholes>()
+export interface Universe  {
+  wormholes: Wormholes
+  state: UniverseState
+}
+
+const multiverse = new Map<Creator, Universe>()
 
 const updateConsumer = (consumer: WormholeConsumer, fields: string[], state: UniverseState) => {
   fields.forEach((field) => { consumer[field] = state[field]; });
@@ -27,12 +32,13 @@ export const Universe: {
   create (creator: Creator,  initialState: UniverseState) {
       const el = getElement(creator);
       const wormholes: Wormholes = new Map();
+      const universe = { wormholes, state: initialState };
       
-      multiverse.set(creator, wormholes);
+      multiverse.set(creator, universe);
 
       const connectedCallback = creator.connectedCallback;
       creator.connectedCallback = function () {
-        multiverse.set(creator, wormholes);
+        multiverse.set(creator, universe);
         if (connectedCallback) { connectedCallback.call(creator) }
       }
 
@@ -60,7 +66,7 @@ export const Universe: {
         }
 
         wormholes.set(consumer, fields);
-        updateConsumer(consumer, fields, initialState);
+        updateConsumer(consumer, fields, universe.state);
 
         onOpen.resolve();
       });
@@ -70,8 +76,9 @@ export const Universe: {
     const creator = getRenderingRef();
     
     if (multiverse.has(creator)) {
-      const wormholes = multiverse.get(creator);
-      wormholes.forEach((fields, consumer) => { updateConsumer(consumer, fields, state) });
+      const universe = multiverse.get(creator);
+      universe.state = state;
+      universe.wormholes.forEach((fields, consumer) => { updateConsumer(consumer, fields, state) });
     }
     
     return children;
