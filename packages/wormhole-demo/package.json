@@ -13,7 +13,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "devDependencies": {
-    "@stencil/core": "^1.16.0",
+    "@stencil/core": "2.0.0-3",
     "@types/jest": "^26.0.4",
     "@types/puppeteer": "3.0.1",
     "jest": "26.1.0",

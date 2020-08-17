@@ -14,14 +14,14 @@ importers:
     dependencies:
       stencil-wormhole: 'link:../wormhole'
     devDependencies:
-      '@stencil/core': 1.16.0
+      '@stencil/core': 2.0.0-3
       '@types/jest': 26.0.4
       '@types/puppeteer': 3.0.1
       jest: 26.1.0
       jest-cli: 26.1.0
       puppeteer: 5.0.0
     specifiers:
-      '@stencil/core': ^1.16.0
+      '@stencil/core': 2.0.0-3
       '@types/jest': ^26.0.4
       '@types/puppeteer': 3.0.1
       jest: 26.1.0
@@ -739,16 +739,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
-  /@stencil/core/1.16.0:
-    dependencies:
-      typescript: 3.9.6
-    dev: true
-    engines:
-      node: '>=10.13.0'
-      npm: '>=6.0.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-wxZD1YYz/j+7L4XRdEw6yO4HHP6iDa3sCGPQ576lx51szPE9+4RBhpzp5ZMf07j/zkFATtbHu2Q4yuc6QNy5cQ==
   /@stencil/core/2.0.0-3:
     dev: true
     engines:
