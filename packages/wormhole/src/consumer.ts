@@ -10,10 +10,11 @@ export interface WormholeConsumerConstructor {
   new(...args: any[]): WormholeConsumer
 }
 
-export interface OpenWormhole {
+export interface WormholeOpening {
   consumer: WormholeConsumer
   fields: string[]
-  onOpen: DeferredPromise,
+  updater?: (prop: any, value: any) => void
+  onOpen?: DeferredPromise,
 }
 
 export const openWormhole = (Component: WormholeConsumerConstructor, props: string[]) => {
@@ -24,7 +25,7 @@ export const openWormhole = (Component: WormholeConsumerConstructor, props: stri
     const el = getElement(this);
     const onOpen = createDeferredPromise();
 
-    const event = new CustomEvent<OpenWormhole>('openWormhole', {
+    const event = new CustomEvent<WormholeOpening>('openWormhole', {
       bubbles: true,
       composed: true,
       detail: {

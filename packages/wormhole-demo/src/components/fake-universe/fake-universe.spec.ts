@@ -114,3 +114,26 @@ it('should safely connect/disconnect consumer', async () => {
   await page.waitForChanges();
   expect(consumer.message).toEqual('apples');
 });
+
+it('should accept custom updater', async () => {
+  await buildPage({
+    html: buildUniverse('<div class="custom">Custom El</div>')
+  });
+
+  const universe = page.body.querySelector('fake-universe')!
+  const customEl = page.root!.querySelector('div.custom');
+  const customUpdater = jest.fn();
+
+  customEl.dispatchEvent(new CustomEvent('openWormhole', {
+    bubbles: true,
+    detail: {
+      consumer: customEl,
+      fields: ['message'],
+      updater: customUpdater,
+    },
+  }));
+
+  universe.state = { message: 'lemons' };
+  await page.waitForChanges();
+  expect(customUpdater).toHaveBeenCalledWith('message', 'lemons');
+});
