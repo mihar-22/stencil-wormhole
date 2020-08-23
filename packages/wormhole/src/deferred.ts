@@ -1,6 +1,6 @@
-export interface DeferredPromise {
+export interface DeferredPromise<ResolutionType = any> {
   promise: Promise<void>,
-  resolve: () => void;
+  resolve: (res: ResolutionType) => void;
 }
 
 export const createDeferredPromise = (): DeferredPromise => {

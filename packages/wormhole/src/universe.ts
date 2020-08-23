@@ -73,13 +73,12 @@ export const Universe: {
         wormholes.set(consumer, event.detail);
         updateConsumer(event.detail, universe.state);
 
-        onOpen?.resolve();
+        onOpen?.resolve(() => { wormholes.delete(consumer); });
       });
 
       el.addEventListener('closeWormhole', (event: CustomEvent<WormholeConsumer>) => {
         const consumer = event.detail;
         wormholes.delete(consumer);
-        if (disconnectedCallback) { disconnectedCallback.call(consumer); }
       });
   },
 

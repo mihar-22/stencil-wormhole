@@ -10,11 +10,13 @@ export interface WormholeConsumerConstructor {
   new(...args: any[]): WormholeConsumer
 }
 
+export type ForcedDestruction = () => void;
+
 export interface WormholeOpening {
   consumer: WormholeConsumer
   fields: string[]
   updater?: (prop: any, value: any) => void
-  onOpen?: DeferredPromise,
+  onOpen?: DeferredPromise<ForcedDestruction>,
 }
 
 export const openWormhole = (Component: WormholeConsumerConstructor, props: string[]) => {
