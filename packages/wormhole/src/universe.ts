@@ -22,12 +22,10 @@ export interface Universe  {
 const multiverse = new Map<Creator, Universe>()
 
 const updateConsumer = (
-  { consumer, fields, updater }: WormholeOpening,
+  { fields, updater }: WormholeOpening,
   state: UniverseState,
 ) => {
-  const defaultUpdater = (field: string, value: any) => { consumer[field] = value; };
-  const update = updater ?? defaultUpdater;
-  fields.forEach((field) => { update(field, state[field]); });
+  fields.forEach((field) => { updater(field, state[field]); });
 }
 
 export const Universe: {
@@ -56,18 +54,21 @@ export const Universe: {
       el.addEventListener('openWormhole', (event: CustomEvent<WormholeOpening>) => {
         event.stopPropagation();
         const { consumer, onOpen } = event.detail;
-        const { connectedCallback, disconnectedCallback } = consumer;
 
         if (wormholes.has(consumer)) return;
 
-        consumer.connectedCallback = function () {
-          wormholes.set(consumer, event.detail);
-          if (connectedCallback) { connectedCallback.call(consumer); }
-        }
-
-        consumer.disconnectedCallback = function () {
-          wormholes.delete(consumer);
-          if (disconnectedCallback) { disconnectedCallback.call(consumer); }
+        if (typeof consumer !== 'symbol') {
+          const { connectedCallback, disconnectedCallback } = consumer;
+          
+          consumer.connectedCallback = function () {
+            wormholes.set(consumer, event.detail);
+            if (connectedCallback) { connectedCallback.call(consumer); }
+          }
+  
+          consumer.disconnectedCallback = function () {
+            wormholes.delete(consumer);
+            if (disconnectedCallback) { disconnectedCallback.call(consumer); }
+          }
         }
 
         wormholes.set(consumer, event.detail);
