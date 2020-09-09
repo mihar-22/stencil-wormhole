@@ -34,5 +34,8 @@
     "tunnel",
     "universe",
     "wormhole"
-  ]
+  ],
+  "dependencies": {
+    "dom-context": "file:../../../dom-context"
+  }
 }
