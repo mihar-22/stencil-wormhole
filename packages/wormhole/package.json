@@ -36,6 +36,6 @@
     "wormhole"
   ],
   "dependencies": {
-    "dom-context": "file:../../../dom-context"
+    "dom-context": "dom-context"
   }
 }

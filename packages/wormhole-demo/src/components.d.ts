@@ -9,13 +9,13 @@ export namespace Components {
     interface FakeConsumer {
         "data": any;
         "message": string;
-        "wasConnectedCallbackCalled": Mock<any, any>;
-        "wasDisconnectedCallbackCalled": Mock<any, any>;
+        "wasConnectedCallbackCalled": any;
+        "wasDisconnectedCallbackCalled": any;
     }
     interface FakeUniverse {
         "state": Record<string, any>;
-        "wasConnectedCallbackCalled": Mock<any, any>;
-        "wasDisconnectedCallbackCalled": Mock<any, any>;
+        "wasConnectedCallbackCalled": any;
+        "wasDisconnectedCallbackCalled": any;
     }
 }
 declare global {
@@ -40,13 +40,13 @@ declare namespace LocalJSX {
     interface FakeConsumer {
         "data": any;
         "message": string;
-        "wasConnectedCallbackCalled"?: Mock<any, any>;
-        "wasDisconnectedCallbackCalled"?: Mock<any, any>;
+        "wasConnectedCallbackCalled"?: any;
+        "wasDisconnectedCallbackCalled"?: any;
     }
     interface FakeUniverse {
         "state"?: Record<string, any>;
-        "wasConnectedCallbackCalled"?: Mock<any, any>;
-        "wasDisconnectedCallbackCalled"?: Mock<any, any>;
+        "wasConnectedCallbackCalled"?: any;
+        "wasDisconnectedCallbackCalled"?: any;
     }
     interface IntrinsicElements {
         "fake-consumer": FakeConsumer;

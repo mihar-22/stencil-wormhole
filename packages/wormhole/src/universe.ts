@@ -32,12 +32,13 @@ export const Universe: {
       element: el,
       initialState,
     });
+    universe.start();
     multiverse.set(creator, universe);
 
     const connectedCallback = creator.connectedCallback;
     creator.connectedCallback = function () {
       multiverse.set(creator, universe);
-      universe.start();
+      // universe.start();
       if (connectedCallback) {
         connectedCallback.call(creator);
       }
