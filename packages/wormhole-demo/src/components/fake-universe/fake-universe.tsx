@@ -10,9 +10,9 @@ export class FakeUniverse {
     data: {}
   };
 
-  @Prop() wasConnectedCallbackCalled = jest.fn();
+  @Prop() wasConnectedCallbackCalled:any = jest.fn();
 
-  @Prop() wasDisconnectedCallbackCalled = jest.fn();
+  @Prop() wasDisconnectedCallbackCalled:any = jest.fn();
 
   connectedCallback() {
     this.wasConnectedCallbackCalled(this.state.message);

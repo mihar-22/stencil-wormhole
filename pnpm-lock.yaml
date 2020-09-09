@@ -1,13 +1,19 @@
 importers:
   .:
-    specifiers: {}
+    dependencies:
+      dom-context: 0.0.2
+    specifiers:
+      dom-context: 0.0.2
   packages/wormhole:
+    dependencies:
+      dom-context: 0.0.2
     devDependencies:
       '@stencil/core': 2.0.0-3
       semantic-release: 17.1.1_semantic-release@17.1.1
       typescript: 3.9.6
     specifiers:
       '@stencil/core': 2.0.0-3
+      dom-context: 0.0.2
       semantic-release: ^17.1.1
       typescript: ^3.9.6
   packages/wormhole-demo:
@@ -1736,6 +1742,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
+  /dom-context/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-Da2IbABl035i6T2ECPvQJwuOkP1r9suX5//GejtXEwA2NXhDkYNlP4JVqQKOgGyPPf707bZZIj7mqhQ1hHCkeg==
   /domexception/2.0.1:
     dependencies:
       webidl-conversions: 5.0.0
