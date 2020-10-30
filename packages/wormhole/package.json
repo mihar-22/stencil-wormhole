@@ -20,9 +20,6 @@
     "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
     "release": "semantic-release"
   },
-  "peerDependencies": {
-    "@stencil/core": "^1 || ^2"
-  },
   "devDependencies": {
     "@stencil/core": "2.0.0-3",
     "semantic-release": "^17.1.1",
