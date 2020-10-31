@@ -2,12 +2,9 @@ import { getElement } from "@stencil/core";
 import { createDeferredPromise, DeferredPromise } from "./deferred";
 
 export interface WormholeConsumer {
+  prototype?: any
   connectedCallback?(): void
   disconnectedCallback?(): void
-}
-
-export interface WormholeConsumerConstructor {
-  new(...args: any[]): WormholeConsumer
 }
 
 export type ForcedDestruction = () => void;
@@ -19,11 +16,12 @@ export interface WormholeOpening {
   onOpen?: DeferredPromise<ForcedDestruction>
 }
 
-export const openWormhole = (Component: WormholeConsumerConstructor, props: string[]) => {
-  const ComponentPrototype = Component.prototype;
-  const { componentWillLoad } = ComponentPrototype;
+export const openWormhole = (Component: WormholeConsumer, props: string[]) => {
+  const isConstructor = (Component.constructor.name === 'Function');
+  const Proto = isConstructor ? Component.prototype : Component;
+  const componentWillLoad = Proto.componentWillLoad;
 
-  ComponentPrototype.componentWillLoad = function () {
+  Proto.componentWillLoad = function () {
     const el = getElement(this);
     const onOpen = createDeferredPromise();
 
