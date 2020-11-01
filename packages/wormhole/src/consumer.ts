@@ -18,7 +18,7 @@ export interface WormholeOpening {
 
 export const openWormhole = (Component: WormholeConsumer, props: string[]) => {
   const isConstructor = (Component.constructor.name === 'Function');
-  const Proto = isConstructor ? Component.prototype : Component.constructor.prototype;
+  const Proto = isConstructor ? Component.prototype : Component;
   const componentWillLoad = Proto.componentWillLoad;
 
   Proto.componentWillLoad = function () {
