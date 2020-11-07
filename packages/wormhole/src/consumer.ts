@@ -16,7 +16,11 @@ export interface WormholeOpening {
   onOpen?: DeferredPromise<ForcedDestruction>
 }
 
-export const openWormhole = (Component: WormholeConsumer, props: string[]) => {
+export const openWormhole = (
+  Component: WormholeConsumer, 
+  props: string[],
+  isBlocking = true,
+) => {
   const isConstructor = (Component.constructor.name === 'Function');
   const Proto = isConstructor ? Component.prototype : Component;
   const componentWillLoad = Proto.componentWillLoad;
@@ -38,10 +42,12 @@ export const openWormhole = (Component: WormholeConsumer, props: string[]) => {
 
     el.dispatchEvent(event);
 
-    return onOpen.promise.then(() => {
+    const willLoad = () => {
       if (componentWillLoad) {
         return componentWillLoad.call(this);
       }
-    })
+    }
+
+    return isBlocking ? onOpen.promise.then(() => willLoad()) : (willLoad());
   };
 };
