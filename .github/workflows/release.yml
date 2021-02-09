@@ -17,7 +17,7 @@ jobs:
       - name: Install pnpm
         run: curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile=false
       - name: Build
         run: npm run build
       - name: Test
