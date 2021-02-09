@@ -35,7 +35,10 @@ export const openWormhole = (
       detail: {
         consumer: this,
         fields: props,
-        updater: (prop, value) => { this[prop] = value; },
+        updater: (prop, value) => {
+          const target = (prop in el) ? el : this;
+          target[prop] = value;
+        },
         onOpen,
       },
     });

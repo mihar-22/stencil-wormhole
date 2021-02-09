@@ -21,7 +21,7 @@
     "release": "semantic-release"
   },
   "devDependencies": {
-    "@stencil/core": "2.0.0-3",
+    "@stencil/core": "2.4.0",
     "semantic-release": "^17.1.1",
     "typescript": "^3.9.6"
   },
